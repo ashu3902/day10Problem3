@@ -3,6 +3,7 @@ echo "This is multiple coins flip simulator problem"
 declare -A Coin
 declare -A Double
 declare -A Triple
+declare -A allList
 VAR1="H"
 VAr2="T"
 hhCount=0
@@ -50,6 +51,8 @@ do
 done
 hper=$(( $hCount*100/20 ))
 tper=$(( $tCount*100/20 ))
+allList["hCount"]=$hper
+allList["tCount"]=$tper
 echo "Percentage of Head is $hper"
 echo "Percentage of Tail is $tper"
 #Doublet
@@ -92,6 +95,11 @@ echo "Percentage of HH is $hhper"
 echo "Percentage of TT is $ttper"
 echo "Percentage of HT is $htper"
 echo "Percentage of TH is $thper"
+allList["hhCount"]=$hhper
+allList["ttCount"]=$ttper
+allList["htCount"]=$htper
+allList["thCount"]=$thper
+
 #Triplet
 count=1
 while [ $count -ne 21 ]
@@ -153,3 +161,24 @@ echo "Percentage of HHT is $hhtper"
 echo "Percentage of THH is $thhper"
 echo "Percentage of THT is $thtper"
 echo "Percentage of TTH is $tthper"
+allList["hhhCount"]=$hhhper
+allList["tttCount"]=$tttper
+allList["httCount"]=$httper
+allList["hthCount"]=$hthper
+allList["hhtCount"]=$hhtper
+allList["thhCount"]=$thhper
+allList["thtCount"]=$thtper
+allList["tthCount"]=$tthper
+
+large=1;
+a="${allList["hCount"]}";
+for key in ${!allList[@]}
+do
+        if [[ ${allList[key]} -gt $a ]]
+        then
+                large=$key;
+        else
+                large=$a;
+        fi
+done
+echo "The number with highest percenatge is ${allList[$large]} $large  "
